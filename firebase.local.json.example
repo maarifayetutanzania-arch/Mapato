@@ -1,0 +1,13 @@
+{
+  "FIREBASE_PROJECT_ID": "your-firebase-project-id",
+  "FIREBASE_MESSAGING_SENDER_ID": "your-messaging-sender-id",
+  "FIREBASE_API_KEY": "your-public-firebase-web-api-key",
+  "FIREBASE_WEB_APP_ID": "1:your-project-number:web:your-web-app-id",
+  "FIREBASE_ANDROID_APP_ID": "1:your-project-number:android:your-android-app-id",
+  "FIREBASE_IOS_APP_ID": "1:your-project-number:ios:your-ios-app-id",
+  "FIREBASE_AUTH_DOMAIN": "your-firebase-project-id.firebaseapp.com",
+  "FIREBASE_DATABASE_URL": "https://your-database-name.firebaseio.com",
+  "FIREBASE_STORAGE_BUCKET": "your-firebase-project-id.firebasestorage.app",
+  "FIREBASE_APPCHECK_RECAPTCHA_KEY": "your-public-recaptcha-v3-site-key",
+  "FIREBASE_APPCHECK_DEBUG_TOKEN": ""
+}
