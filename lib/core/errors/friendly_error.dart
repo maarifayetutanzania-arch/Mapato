@@ -9,11 +9,13 @@ class FriendlyError {
       return 'emailInvalid';
     }
     if (error is FirebaseFunctionsException &&
-        (error.code == 'invalid-argument' || error.code == 'permission-denied')) {
+        (error.code == 'invalid-argument' ||
+            error.code == 'permission-denied')) {
       return 'otpInvalid';
     }
     if (error is FirebaseException &&
-        (error.code == 'unavailable' || error.code == 'network-request-failed')) {
+        (error.code == 'unavailable' ||
+            error.code == 'network-request-failed')) {
       return 'networkError';
     }
     return 'genericError';

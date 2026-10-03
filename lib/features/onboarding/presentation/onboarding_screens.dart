@@ -17,8 +17,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _page = 0;
 
   static const _slides = [
-    (Icons.account_balance_wallet_outlined, 'onboardingIncomeTitle', 'onboardingIncomeBody'),
-    (Icons.payments_outlined, 'onboardingExpenseTitle', 'onboardingExpenseBody'),
+    (
+      Icons.account_balance_wallet_outlined,
+      'onboardingIncomeTitle',
+      'onboardingIncomeBody',
+    ),
+    (
+      Icons.payments_outlined,
+      'onboardingExpenseTitle',
+      'onboardingExpenseBody',
+    ),
     (Icons.savings_outlined, 'onboardingSavingsTitle', 'onboardingSavingsBody'),
     (Icons.insights_outlined, 'onboardingWealthTitle', 'onboardingWealthBody'),
   ];
@@ -30,8 +38,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _finish() async {
-    await SharedPreferences.getInstance().then((preferences) =>
-        preferences.setBool('onboarding_completed', true));
+    await SharedPreferences.getInstance().then(
+      (preferences) => preferences.setBool('onboarding_completed', true),
+    );
     if (mounted) context.go('/language');
   }
 
@@ -64,7 +73,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   Align(
                     alignment: Alignment.centerRight,
-                    child: TextButton(onPressed: _finish, child: Text(l10n.skip)),
+                    child: TextButton(
+                      onPressed: _finish,
+                      child: Text(l10n.skip),
+                    ),
                   ),
                   Expanded(
                     child: PageView.builder(
@@ -85,19 +97,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   color: colors.primaryContainer,
                                   borderRadius: BorderRadius.circular(36),
                                 ),
-                                child: Icon(item.$1, color: colors.primary, size: 52),
+                                child: Icon(
+                                  item.$1,
+                                  color: colors.primary,
+                                  size: 52,
+                                ),
                               ),
                               const SizedBox(height: 36),
                               Text(
                                 _localized(item.$2),
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700),
+                                style: Theme.of(context).textTheme.headlineSmall
+                                    ?.copyWith(fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: 12),
                               Text(
                                 _localized(item.$3),
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: colors.onSurfaceVariant),
+                                style: Theme.of(context).textTheme.bodyLarge
+                                    ?.copyWith(color: colors.onSurfaceVariant),
                               ),
                             ],
                           ),
@@ -107,23 +125,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(_slides.length, (index) => AnimatedContainer(
-                      duration: const Duration(milliseconds: 180),
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      width: index == _page ? 24 : 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: index == _page ? colors.primary : colors.outlineVariant,
-                        borderRadius: BorderRadius.circular(8),
+                    children: List.generate(
+                      _slides.length,
+                      (index) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 180),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: index == _page ? 24 : 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: index == _page
+                              ? colors.primary
+                              : colors.outlineVariant,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                    )),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   FilledButton(
                     onPressed: _page == _slides.length - 1
                         ? _finish
-                        : () => _controller.nextPage(duration: const Duration(milliseconds: 240), curve: Curves.easeOut),
-                    child: Text(_page == _slides.length - 1 ? l10n.getStarted : l10n.next),
+                        : () => _controller.nextPage(
+                            duration: const Duration(milliseconds: 240),
+                            curve: Curves.easeOut,
+                          ),
+                    child: Text(
+                      _page == _slides.length - 1 ? l10n.getStarted : l10n.next,
+                    ),
                   ),
                 ],
               ),
@@ -139,10 +167,12 @@ class LanguageSelectionScreen extends ConsumerStatefulWidget {
   const LanguageSelectionScreen({super.key});
 
   @override
-  ConsumerState<LanguageSelectionScreen> createState() => _LanguageSelectionScreenState();
+  ConsumerState<LanguageSelectionScreen> createState() =>
+      _LanguageSelectionScreenState();
 }
 
-class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScreen> {
+class _LanguageSelectionScreenState
+    extends ConsumerState<LanguageSelectionScreen> {
   late String _selected = Localizations.localeOf(context).languageCode;
 
   @override
@@ -165,8 +195,14 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
                   },
                   child: Column(
                     children: [
-                      RadioListTile<String>(value: 'en', title: Text(l10n.english)),
-                      RadioListTile<String>(value: 'sw', title: Text(l10n.swahili)),
+                      RadioListTile<String>(
+                        value: 'en',
+                        title: Text(l10n.english),
+                      ),
+                      RadioListTile<String>(
+                        value: 'sw',
+                        title: Text(l10n.swahili),
+                      ),
                     ],
                   ),
                 ),
@@ -174,7 +210,10 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
                 FilledButton(
                   onPressed: () async {
                     final preferences = await SharedPreferences.getInstance();
-                    await preferences.setString('preferred_language', _selected);
+                    await preferences.setString(
+                      'preferred_language',
+                      _selected,
+                    );
                     if (!context.mounted) return;
                     context.go('/login');
                   },

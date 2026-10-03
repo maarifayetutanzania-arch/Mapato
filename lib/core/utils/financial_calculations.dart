@@ -2,7 +2,8 @@ abstract final class FinancialCalculations {
   static int total(Iterable<int> amounts) =>
       amounts.fold<int>(0, (sum, amount) => sum + amount);
 
-  static int balance({required int income, required int expenses}) => income - expenses;
+  static int balance({required int income, required int expenses}) =>
+      income - expenses;
 
   static int savings({required int income, required int expenses}) =>
       balance(income: income, expenses: expenses);

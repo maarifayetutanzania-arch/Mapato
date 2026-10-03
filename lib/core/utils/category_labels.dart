@@ -24,7 +24,10 @@ String categoryLabel(BuildContext context, String id) {
   };
 }
 
-List<(String, String)> transactionCategories(BuildContext context, bool income) => income
+List<(String, String)> transactionCategories(
+  BuildContext context,
+  bool income,
+) => income
     ? [
         ('salary', categoryLabel(context, 'salary')),
         ('business', categoryLabel(context, 'business')),
@@ -46,18 +49,18 @@ List<(String, String)> transactionCategories(BuildContext context, bool income) 
       ];
 
 IconData categoryIcon(String id) => switch (id) {
-      'salary' => Icons.work_outline,
-      'business' => Icons.storefront_outlined,
-      'freelance' => Icons.laptop_mac,
-      'investment' => Icons.trending_up,
-      'food' => Icons.restaurant_outlined,
-      'transport' => Icons.directions_bus_outlined,
-      'rent' => Icons.home_outlined,
-      'bills' => Icons.receipt_long_outlined,
-      'shopping' => Icons.shopping_bag_outlined,
-      'health' => Icons.health_and_safety_outlined,
-      'education' => Icons.school_outlined,
-      'entertainment' => Icons.movie_outlined,
-      'family' => Icons.family_restroom,
-      _ => Icons.category_outlined,
-    };
+  'salary' => Icons.work_outline,
+  'business' => Icons.storefront_outlined,
+  'freelance' => Icons.laptop_mac,
+  'investment' => Icons.trending_up,
+  'food' => Icons.restaurant_outlined,
+  'transport' => Icons.directions_bus_outlined,
+  'rent' => Icons.home_outlined,
+  'bills' => Icons.receipt_long_outlined,
+  'shopping' => Icons.shopping_bag_outlined,
+  'health' => Icons.health_and_safety_outlined,
+  'education' => Icons.school_outlined,
+  'entertainment' => Icons.movie_outlined,
+  'family' => Icons.family_restroom,
+  _ => Icons.category_outlined,
+};

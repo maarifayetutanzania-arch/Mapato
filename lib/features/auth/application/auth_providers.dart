@@ -5,7 +5,9 @@ import '../../../core/providers.dart';
 import '../data/auth_repository.dart';
 import '../domain/app_profile.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>((ref) => AuthRepository());
+final authRepositoryProvider = Provider<AuthRepository>(
+  (ref) => AuthRepository(),
+);
 
 final authStateProvider = StreamProvider<User?>((ref) {
   if (!ref.watch(firebaseConfiguredProvider)) return Stream.value(null);

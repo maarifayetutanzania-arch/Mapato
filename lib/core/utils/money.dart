@@ -2,7 +2,12 @@ import 'package:intl/intl.dart';
 
 abstract final class Money {
   static const maxMajorAmount = 1000000000000;
-  static const _minorDigits = <String, int>{'TZS': 0, 'JPY': 0, 'USD': 2, 'KES': 2};
+  static const _minorDigits = <String, int>{
+    'TZS': 0,
+    'JPY': 0,
+    'USD': 2,
+    'KES': 2,
+  };
 
   static int minorDigits(String currency) => _minorDigits[currency] ?? 2;
 
@@ -19,7 +24,8 @@ abstract final class Money {
     if (digits == 0) return major.toInt();
     final fraction = parts.length == 1 ? '' : parts[1];
     final scaledFraction = fraction.padRight(digits, '0');
-    final value = major * BigInt.from(10).pow(digits) +
+    final value =
+        major * BigInt.from(10).pow(digits) +
         BigInt.tryParse(scaledFraction.isEmpty ? '0' : scaledFraction)!;
     final maximum = BigInt.from(maxMajorAmount) * BigInt.from(10).pow(digits);
     return value > maximum ? null : value.toInt();
@@ -40,9 +46,13 @@ abstract final class Money {
     final digits = minorDigits(currency);
     final divisor = BigInt.from(10).pow(digits);
     final amount = BigInt.from(amountMinor);
-    final major = amount ~/ divisor;
-    if (digits == 0) return major.toString();
-    final fraction = (amount % divisor).toString().padLeft(digits, '0');
-    return '$major.$fraction';
+    final isNegative = amount < BigInt.zero;
+    final absoluteAmount = isNegative ? -amount : amount;
+    final major = absoluteAmount ~/ divisor;
+    if (digits == 0) {
+      return isNegative ? '-$major' : major.toString();
+    }
+    final fraction = (absoluteAmount % divisor).toString().padLeft(digits, '0');
+    return isNegative ? '-$major.$fraction' : '$major.$fraction';
   }
 }
